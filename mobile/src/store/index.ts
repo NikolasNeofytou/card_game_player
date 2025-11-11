@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
+import gameReducer from './slices/gameSlice';
 
 export const store = configureStore({
   reducer: {
-    // Reducers will be added here
+    game: gameReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
