@@ -4,6 +4,7 @@ import { Server } from 'socket.io';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import gameRoutes from './routes/games';
+import { setupWebSocket } from './websocket';
 
 dotenv.config();
 
@@ -58,14 +59,8 @@ app.get('/api', (req, res) => {
   });
 });
 
-// WebSocket connection
-io.on('connection', (socket) => {
-  console.log('Client connected:', socket.id);
-  
-  socket.on('disconnect', () => {
-    console.log('Client disconnected:', socket.id);
-  });
-});
+// WebSocket setup
+setupWebSocket(io);
 
 const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => {
